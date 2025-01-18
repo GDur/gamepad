@@ -351,10 +351,9 @@ export class Controller {
         this.options.parentElement.append(this.anchorElement);
 
         // Events
-        const eventStarterElement =
-            this.isJoystick || !this.options.fixed
-                ? this.parentElement
-                : this.gamepadControllerElement;
+        const eventStarterElement = !this.options.fixed
+            ? this.parentElement
+            : this.gamepadControllerElement;
 
         eventStarterElement.addEventListener("pointerdown", this.handleStart, {
             passive: false,
@@ -375,10 +374,9 @@ export class Controller {
 
     destroy() {
         // Events
-        const eventStarterElement =
-            this.isJoystick || !this.options.fixed
-                ? this.parentElement
-                : this.gamepadControllerElement;
+        const eventStarterElement = !this.options.fixed
+            ? this.parentElement
+            : this.gamepadControllerElement;
 
         eventStarterElement.removeEventListener(
             "pointerdown",
