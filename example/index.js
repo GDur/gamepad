@@ -167,9 +167,24 @@ const GP = new Gamepad([
         parentElement: document.querySelector("#app-left"),
         radius: 60,
         axis: ControllerAxisType.all,
-        fixed: true,
+        fixed: false,
         position: {
             left: "25%",
+            top: "50%",
+        },
+        onInput(state) {
+            PL.controller.value = state.value;
+            PL.controller.angle = state.angle;
+        },
+    }),
+    new Joystick({
+        elementId: "top-joystick",
+        parentElement: document.querySelector("#app-right"),
+        radius: 50,
+        axis: ControllerAxisType.all,
+        fixed: true,
+        position: {
+            right: "25%",
             top: "50%",
         },
         onInput(state) {
@@ -180,12 +195,30 @@ const GP = new Gamepad([
     new Button({
         elementId: "f-button",
         parentElement: document.querySelector("#app-right"),
-        radius: 60,
+        radius: 30,
         fixed: true,
         text: "F",
         position: {
-            right: "25%",
-            bottom: "50%",
+            right: "35%",
+            bottom: "20%",
+        },
+        onInput(state) {
+            if (!state.value) {
+                return;
+            }
+            PL.fire();
+            GP.vibrate([100]);
+        },
+    }),
+    new Button({
+        elementId: "r-button",
+        parentElement: document.querySelector("#app-right"),
+        radius: 30,
+        fixed: true,
+        text: "R",
+        position: {
+            right: "10%",
+            bottom: "20%",
         },
         onInput(state) {
             if (!state.value) {
